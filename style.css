@@ -4,7 +4,7 @@ h1 {
   color: white;
   text-align: center;
   background-color: black;
-  box-shadow: 5px 10px lightgray;
+  box-shadow: 5px 5px lightgray;
 }
 #left-box {
   float: left;
@@ -12,7 +12,7 @@ h1 {
   height: 500px;
   border: 1px solid black;
   padding: 10px;
-  box-shadow: 5px 10px lightgray;
+  box-shadow: 5px 5px lightgray;
 }
 #right-box {
   float: left;
@@ -20,7 +20,7 @@ h1 {
   height: 500px;
   border: 1px solid black;
   padding: 10px;
-  box-shadow: 5px 10px lightgray;
+  box-shadow: 5px 5px lightgray;
 }
 #weather-view {
   width: 100%;
