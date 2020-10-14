@@ -3,7 +3,7 @@ h1 {
   height: 50px;
   color: white;
   text-align: center;
-  background-color: black;
+  background-color: rgb(14, 14, 14);
   box-shadow: 5px 5px lightgray;
 }
 #left-box {
