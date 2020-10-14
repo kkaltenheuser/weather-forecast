@@ -1,9 +1,10 @@
+// cities that can be utilized for query and other location taken into account when searching
 let cities = ["Boston", "Philadelphia", "Detroit", "San Francisco"];
 let apiKey = "c94ac49bcd423ef700d020797840e0c4";
 let lat = "latitude";
 let lon = "longitude";
 let uvIndex = lat + lon;
-
+// upon use of buttons, information will be pulled
 cities.forEach(function (city, index, originalArr) {
   renderButtons(city);
 
@@ -11,7 +12,7 @@ cities.forEach(function (city, index, originalArr) {
     displayWeatherInfo(city);
   }
 });
-
+// information will be displayed via the query pull of the user
 function displayWeatherInfo(city) {
   let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}&units=imperial`;
 
@@ -19,17 +20,18 @@ function displayWeatherInfo(city) {
 
   $.get(queryURL).then(function (response) {
     // let unIndex = response.coord.lon.lat;
+    // compare lat and lon to ensure correct data and display location
     let lon = response.coord.lon;
     let lat = response.coord.lat;
     let queryUV = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-
+    // compiling feedback from query
     $.get(queryUV).then(function (uvResponse) {
       console.log(uvResponse);
-      //===== Data Calculations =======
+      // Data Calculations - Weather
       let temperature = response.main.temp;
       let windSpeed = response.wind.speed;
       let humidity = response.main.humidity;
-      // ====== Building HTML Element =====
+      // HTML Element
       let cityDiv = $("<div class='city'>");
       let header = $("<h4>").text(city);
       let pOne = $("<p>").text(
@@ -50,7 +52,7 @@ function displayWeatherInfo(city) {
       let pFour = $("<p>").text("UV Index: ").append(uvSpan);
       cityDiv.append(header, pOne, pTwo, pThree, pFour);
 
-      // =======Push Element to Page =====
+      // Push Element to Page
 
       $("#weather-view").empty();
       $("#weather-view").prepend(cityDiv);
@@ -69,14 +71,14 @@ function renderButtons(city) {
 $("#searchBtn").on("click", function (event) {
   event.preventDefault();
 
-  // ====== Declare Variables ======
+  // State Variable
   let $weather = $("#city-input").val();
 
-  // ===== Update Search History =====
+  // Update Search History of User
   cities.push($weather);
   localStorage.setItem("weather", JSON.stringify(cities));
 
-  // == Function calls ==
+  // Functions
   renderButtons($weather);
   displayWeatherInfo($weather);
 });
